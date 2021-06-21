@@ -1,6 +1,5 @@
 #LV model
-library(tidyverse)    
-library(ggplot2)      
+library(tidyverse)         
 library(doSNOW)
 library(doParallel) 
 library(data.table)
@@ -8,15 +7,20 @@ library(deSolve)
 library(foreach)
 library(tibble)
 
+#the equation of the model:
+# dR/dt = rR – αN*R
+# dN/dt = fαNR – qN – eNP
+# dP/dt = zeNP – bP
+
 lv3 <- function(t, start, parms) {
   #set the start values for each of the species
   R <- start["R"]                          # basal prey species
   
-  N <- start["N"]                          # intermediate predators
+  N <- start["N"]                          # primary consumer/intermediate predator
   
   P <- start["P"]                        # top predators
   
-  # allow R to look within the parameters in the Lv equation. parameters are referred to as parms
+  # allow R to look within the parameters in the Lv equation.
   with(as.list(parms), {
     
     dR <- r*R - a*N*R                 # dynamics of the resources(dR)
@@ -102,7 +106,7 @@ start <- c(R = 1000,
 #set the times for simulation to 100    where t is in years
 time <- seq(0, 100, 1)
 
-#run the simulation by passing each parameters
+#run the simulation by passing each parameters to the function
 dd <- lv3_lsoda(start, parms, time)
 
 head(dd)  
