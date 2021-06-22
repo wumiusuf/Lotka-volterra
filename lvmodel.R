@@ -188,16 +188,5 @@ ggplot(extract_res_sim, aes(x = time,
   
   theme_dark()
 
-# use sim-length to filter out data to simulations that runs to 100 time steps
-#ggplot 100time steps(years)
-ggplot(filter(extract_res_sim, sim_length == 100),
-       aes(x = time, 
-           y = abundance,
-           group = parms)) +
-  
-  geom_line(col = "white", alpha=0.4) +
-  facet_wrap(~species, scales = "free") +
-  scale_y_log10() +
-  theme_dark()
 #stop cluster
 stopCluster(clus)
