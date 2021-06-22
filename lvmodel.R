@@ -96,7 +96,7 @@ parms <- c(r = 0.5,              # growth rate of prey
            e = 0.001           # feeding rate of P on N
 )   
 
-# start values/abundance of each species
+# start values of each species
 start <- c(R = 1000,
            
            N = 100,
